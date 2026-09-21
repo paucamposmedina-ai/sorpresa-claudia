@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Claudia 🌻</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            background: #090806;
+            color: white;
+            font-family: Georgia, serif;
+        }
+        /* =========================
+           PANTALLA INICIAL
+        ========================= */
+        .inicio {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 25px;
+            background:
+                radial-gradient(
+                    circle at center,
+                    #332b12,
+                    #090806 65%
+                );
+        }
+        .caja {
+            max-width: 600px;
+            padding: 45px 30px;
+            border-radius: 30px;
+            background: rgba(20, 17, 10, 0.85);
+            border: 1px solid rgba(255, 210, 70, 0.3);
+            box-shadow:
+                0 20px 80px rgba(0,0,0,0.6);
+            animation: aparecer 1.5s ease;
+        }
+        .pequeño {
+            color: #e9c94b;
+            letter-spacing: 4px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        h1 {
+            font-size: 60px;
+            font-weight: normal;
+            margin: 15px 0;
+        }
+        .subtitulo {
+            color: #d8d0bf;
+            margin-bottom: 30px;
+        }
+        button {
+            border: none;
+            border-radius: 50px;
+            padding: 15px 28px;
+            background: #f2cc3d;
+            color: #211b08;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        /* =========================
+           CONTENIDO
+        ========================= */
+        #contenido {
+            display: none;
+            max-width: 750px;
+            margin: auto;
+            padding: 70px 18px 100px;
+        }
+        /* =========================
+           TITULO
+        ========================= */
+        .titulo {
+            text-align: center;
+            margin-bottom: 45px;
+            animation: aparecer 1.5s ease;
+        }
+        .titulo h2 {
+            font-size: 38px;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+        .titulo p {
+            color: #d8d0bf;
+        }
+        /* =========================
+           CARTA
+        ========================= */
+        .carta {
+            font-size: 19px;
+            line-height: 1.8;
+            color: #f1eadc;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,210,70,0.2);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow:
+                0 15px 50px rgba(0,0,0,0.25);
+            animation: subir 1.5s ease;
+        }
+        /* =========================
+           SECCIÓN RAZONES
+        ========================= */
+        .razones-titulo {
+            text-align: center;
+            margin-top: 80px;
+            margin-bottom: 30px;
+        }
+        .razones-titulo h2 {
+            font-size: 32px;
+            font-weight: normal;
+        }
+        .razones-titulo p {
+            color: #cfc6b4;
+        }
+        .razones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .razon {
+            padding: 25px 20px;
+            border-radius: 22px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(242,204,61,0.10),
+                    rgba(255,255,255,0.03)
+                );
+            border: 1px solid rgba(255,210,70,0.15);
+            text-align: center;
+            transition:
+                transform 0.3s,
+                border 0.3s;
+        }
+        .razon:hover {
+            transform: translateY(-5px);
+            border: 1px solid rgba(255,210,70,0.45);
+        }
+        .razon .emoji {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+        .razon h3 {
+            color: #f2cc3d;
+            font-size: 19px;
+            font-weight: normal;
+            margin: 8px 0;
+        }
+        .razon p {
+            color: #d8d0bf;
+            line-height: 1.5;
+            font-size: 15px;
+            margin: 0;
+        }
+        /* =========================
+           CONTADOR
+        ========================= */
+        .contador {
+            margin-top: 70px;
+            padding: 30px;
+            text-align: center;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,210,70,0.18);
+        }
+        .contador h2 {
+            font-weight: normal;
+            font-size: 28px;
+        }
+        .numero {
+            color: #f2cc3d;
+            font-size: 42px;
+        }
+        /* =========================
+           SORPRESA FINAL
+        ========================= */
+        .final {
+            text-align: center;
+            margin-top: 80px;
+            padding: 35px 20px;
+        }
+        .final h2 {
+            font-size: 32px;
+            font-weight: normal;
+        }
+        .mensaje-final {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 25px;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(242,204,61,0.12),
+                    rgba(255,255,255,0.03)
+                );
+            border: 1px solid rgba(255,210,70,0.25);
+            font-size: 21px;
+            line-height: 1.7;
+            color: #f5eddf;
+            animation: aparecer 1s ease;
+        }
+        /* =========================
+           FLORES
+        ========================= */
+        .flor {
+            position: fixed;
+            top: -30px;
+            font-size: 25px;
+            animation: caer linear infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+        /* =========================
+           ANIMACIONES
+        ========================= */
+        @keyframes caer {
+            from {
+                transform:
+                    translateY(-50px)
+                    rotate(0deg);
+            }
+            to {
+                transform:
+                    translateY(110vh)
+                    rotate(360deg);
+            }
+        }
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes subir {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* =========================
+           MÓVIL
+        ========================= */
+        @media(max-width:600px) {
+            h1 {
+                font-size: 48px;
+            }
+            .titulo h2 {
+                font-size: 32px;
+            }
+            .carta {
+                font-size: 17px;
+                padding: 23px;
+            }
+            .razones {
+                grid-template-columns: 1fr;
+            }
+            .contador .numero {
+                font-size: 34px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- =========================
+     PANTALLA INICIAL
+========================= -->
+<section class="inicio" id="inicio">
+    <div class="caja">
+        <div class="pequeño">
+            Una pequeña sorpresa
+        </div>
+        <h1>
+            🌻 Claudia
+        </h1>
+        <p class="subtitulo">
+            Para ti, tus flores amarillas.
+        </p>
+        <button onclick="abrirCarta()">
+            Abrir mi sorpresa 💛
+        </button>
+    </div>
+</section>
+<!-- =========================
+     CONTENIDO
+========================= -->
+<main id="contenido">
+    <div class="titulo">
+        <h2>
+            Casi 7 meses contigo 🌻
+        </h2>
+        <p>
+            Y ojalá sean muchísimos más.
+        </p>
+    </div>
+    <!-- CARTA -->
+    <div class="carta">
+        Claudia, mi vida, eres lo mejor que me ha pasado y gracias a ti he aprendido mucho y ha mejorado mucho mi vida. Le has dado a mi vida lo que necesitaba y quiero que siga siendo asi porque estoy super orgulloso de ti, de tus acciones, de tus decisiones y del amor que me das estemos bien o estemos mal. También te queria volver a pedir perdón por todas mis malas palabras, mis malas acciones, que sin yo quererlo ni saberlo tanto daño te han hecho, aunque ahora mismo nuestra relación no este bien o directamente no esté no me imagino una vida sin ti. No puedo leer tus textos, nuestras fotos y recordar nuestros momentos felices sin que se me pongan los ojos llorosos, porque de verdad no he amado tanto a nadie ni voy a amar asi nunca más si te vas de mi vida. Llegaste a la vida de un chico que estaba perdido para iluminarlo y enseñarle lo que de verdad es el amor amándolo como siempre soñó que alguien lo hiciera, y gracias a ti su sueño se convirtió en realidad y esos sueños a la vez cambiaron, ahora solo sueño con formar una familia a tu lado y vivir la vida solo contigo. Me he dado cuenta de que no he sido lo que deberia haber sido y yo tampoco soy asi, o a lo mejor si y no lo sabia, pero quiero que me des la oportunidad de ser feliz a tu lado y hacerte feliz a ti también, no quiero que estemos mal ni que tu sufras por mi culpa. Vamos a cambiar nuestra relación para que funcione y yo prometo cambiar hasta ser el hombre perfecto para ti y no voy a parar hasta que lo consiga. Y con cambiar nuestra relación me refiero a nuestra comunicación y esas pequeñas cosas que debemos corregir pero primero prometo cambiar yo. Y porfavor vamos a estar toda la vida juntos y vamos a enseñarles a nuestros hijos como tienen que ser desde un principio y a enseñarles que el amor existe de verdad igual que me lo has enseñado tu a mi. No puedo vivir sin ti mi vida.
+
+        <br><br>
+        TE AMO hasta el infinito y mas allá
+    </div>
+    <!-- =========================
+         RAZONES
+    ========================= -->
+    <section>
+        <div class="razones-titulo">
+            <h2>
+                7 cosas que adoro de ti
+            </h2>
+            <p>
+                Aunque podría escribir muchísimas más...
+            </p>
+        </div>
+        <div class="razones">
+            <div class="razon">
+                <div class="emoji">🌻</div>
+                <h3>
+                    Tu forma de ser
+                </h3>
+                <p>
+                    Eres la mejor persona que he podido conocer y tienes un corazón enorme. Y no te cambiaría por nada.
+                </p>
+            </div>
+            <div class="razon">
+                <div class="emoji">🫶</div>
+                <h3>
+                    Cómo me haces sentir
+                </h3>
+                <p>
+                    Contigo hasta los días normales se sienten especiales. Sin ti sé que no seria ni la mitad de feliz que soy y sin ti mis dias no tendrian ningún sentido.
+                </p>
+            </div>
+            <div class="razon">
+                <div class="emoji">✨</div>
+                <h3>
+                    Tus pequeños detalles
+                </h3>
+                <p>
+                    Esas pequeñas cosas que haces y que quizá ni siquiera sabes cuánto significan para mí. No sé si te hago saberlo pero me siento muy querido a tu lado solo por la atención que me prestas y como me cuidas, tu sabes que cada detallito lo valoro más que a nada.
+                </p>
+            </div>
+            <div class="razon">
+                <div class="emoji">😂</div>
+                <h3>
+                    Nuestras risas
+                </h3>
+                <p>
+                    Porque contigo siempre hay algún momento que termina haciéndome sonreír. Siempre busco hacerte reir porque me encanta su sonrisa y siempre pensé que un dia te cansarias pero al revés, siempre me he reido contigo porque aparte de yo hacer el idiota tu siempre me has seguido las coñas y hemos pasado tantos dias felices y de risas. Me encantan.
+                </p>
+            </div>
+            <div class="razon">
+                <div class="emoji">🤍</div>
+                <h3>
+                    Tu cariño
+                </h3>
+                <p>
+                    Gracias por todo el amor que me das, incluso cuando las cosas no son perfectas. Porque hasta cuando tu no estás bien y me ves a mi mal me demuestras el amor que me tienes, en todas las situaciones que se nos pongan por delante he sabido que me amas gracias a ti, por como me lo demuestras cada dia.
+                </p>
+            </div>
+            <div class="razon">
+                <div class="emoji">🌙</div>
+                <h3>
+                    Nuestros momentos
+                </h3>
+                <p>
+                    Cada recuerdo contigo tiene un lugar especial dentro de mí. Cada lugar donde hemos ido y hemos disfrutado juntos me recuerda a ti, cada canción que cantamos mientras te arreglas o mientras hacemos tu maleta o cualquier otra cosa que hagamos me recuerda esos momentos. Tenemos nuestras canciones porque uno le enseña al otro las que le gusta y aunque diga que no me gustan y que son del tiktok tengo que admitir que me recuerdan a ti y me las sé enteras pero no me gusta darte la razooon jajajajajajaj.
+                </p>
+            </div>
+            <div class="razon">
+                <div class="emoji">❤️</div>
+                <h3>
+                    Simplemente tú
+                </h3>
+                <p>
+                    Porque entre todas las personas del mundo, me alegra que seas tú. Y espero que siempre seas tu durante toda mi vida.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- =========================
+         CONTADOR
+    ========================= -->
+    <div class="contador">
+        <h2>
+            Y esto solo acaba de empezar...
+        </h2>
+        <div class="numero">
+            Casi 7 meses 🌻
+        </div>
+        <p>
+            Y espero que este número siga creciendo durante muchísimo tiempo.
+        </p>
+    </div>
+    <!-- =========================
+         FINAL
+    ========================= -->
+    <div class="final">
+        <h2>
+            Una última cosa... 💌
+        </h2>
+        <button onclick="mostrarMensaje()">
+            Abrir 💛
+        </button>
+        <div class="mensaje-final" id="mensajeFinal">
+            Claudia...
+            <br><br>
+            Gracias por todo lo que me has amado, demostrado y por lo feliz que me has hecho desde que empezamos.
+            <br><br>
+            Gracias por cada momento, cada risa,
+            cada abrazo y cada recuerdo.
+            <br><br>
+            No sé qué nos deparará el futuro,
+            pero sí sé que quiero seguir creando
+            recuerdos contigo.
+            <br><br>
+            Te amo muchísimo.
+        </div>
+    </div>
+</main>
+<!-- =========================
+     MÚSICA
+========================= -->
+<audio id="musica">
+    <source
+        src="tiempos-de-dios.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+<script>
+/* =========================
+   ABRIR SORPRESA
+========================= */
+function abrirCarta() {
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("contenido").style.display = "block";
+    let musica = document.getElementById("musica");
+    musica.currentTime = 31;
+    musica.play();
+    crearFlores();
+}
+/* =========================
+   PARAR CANCIÓN EN 1:14
+========================= */
+document.getElementById("musica").addEventListener(
+    "timeupdate",
+    function() {
+        if (this.currentTime >= 74) {
+            this.pause();
+        }
+    }
+);
+/* =========================
+   MENSAJE FINAL
+========================= */
+function mostrarMensaje() {
+    document.getElementById("mensajeFinal").style.display = "block";
+}
+/* =========================
+   CREAR FLORES
+========================= */
+function crearFlores() {
+    for (let i = 0; i < 30; i++) {
+        let flor = document.createElement("div");
+        flor.className = "flor";
+        flor.innerHTML = "🌻";
+        flor.style.left =
+            Math.random() * 100 + "%";
+        flor.style.animationDuration =
+            (5 + Math.random() * 6) + "s";
+        flor.style.animationDelay =
+            Math.random() * 5 + "s";
+        document.body.appendChild(flor);
+    }
+}
+</script>
+</body>
+</html>
